@@ -1,16 +1,22 @@
 #include "shell.hpp"
 
+using namespace std;
+
 void shell() {
   while (1) {
     std::string userInput;
-
-    std::cout << "Enter command: ";
-    std::getline(std::cin, userInput);
+    cout << "Enter command: ";
+    getline(cin, userInput);
 
     if (userInput == "clear") {
       clear();
+    } else if (userInput == "pwd") {
+      pwd();
+    } 
+    else if (userInput.find("echo ") != string::npos) {
+      echo(userInput);
     } else {
-      std::cout << "Invalid command!" << std::endl;
+      cout << "Invalid command!" << endl;
     }
   }
 }

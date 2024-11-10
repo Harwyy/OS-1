@@ -15,4 +15,15 @@ void clear() {
 }
 
 void pwd() {
+  char buffer[BUFSIZE];
+  DWORD dwRet = GetCurrentDirectoryA(BUFSIZE, buffer);
+  if (dwRet == 0) {
+    cerr << "Error getting the current directory: " << GetLastError() << endl;
+  } else {
+    cout << "\nPath\n----\n" << buffer << "\n" << endl;
+  }
+}
+
+void echo(const string& input){
+  cout << input << endl;
 }
