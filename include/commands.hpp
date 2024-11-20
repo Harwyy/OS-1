@@ -1,15 +1,10 @@
 #ifndef commands_hpp
 #define commands_hpp
 
-#include <tchar.h>
-#include <windows.h>
-
 #include <iostream>
 #include <string>
-
-using namespace std;
-
-#define BUFSIZE 4096
+#include <chrono>
+#include <vector>
 
 void clear();
 
@@ -17,18 +12,16 @@ void pwd();
 
 void ls();
 
-void cd();
+void cd(const std::string & path);
 
-void execute();
+void mkdir(const std::string & path);
 
-void mkdir();
-
-void rmdir();
+void rmdir(const std::string & path);
 
 void echo(const std::string& word);
 
-void cat();
+void exitHell();
 
-void exit();
+void execute(const std::string &pathWithArgs);
 
 #endif

@@ -1,11 +1,12 @@
 #ifndef shell_hpp
 #define shell_hpp
 
-#include <iostream>
+#include <string>
+#include <vector>
 
-#include "commands.hpp"
-
-
+void addToHistory(const std::string& command);
 void shell();
+
+extern std::vector<std::string> history;
 
 #endif
