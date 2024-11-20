@@ -1,7 +1,0 @@
-# ninja log v6
-22	372	7538354433464239	CMakeFiles/Hell.dir/benchmark/test_threads.cpp.obj	11e8a8285f913d78
-17	491	7538354433413844	CMakeFiles/Hell.dir/benchmark/benchmark4.cpp.obj	1a1658e342d9cca0
-12	424	7538354433363488	CMakeFiles/Hell.dir/src/shell.cpp.obj	6bc8f3d88c974157
-1	1014	7538354433251271	CMakeFiles/Hell.dir/src/commands.cpp.obj	daf21c915fda5765
-1	184	7538354619705130	build.ninja	4d8e42514edd2b10
-6	96	7538354619915477	Hell.exe	f5956f1135476e71
