@@ -3,9 +3,10 @@
 #include <iostream>
 #include <limits>
 #include <queue>
+#include <stack>
 #include <vector>
 #include "string"
-
+#include "thread"
 
 using namespace std;
 using namespace chrono;
@@ -60,13 +61,13 @@ vector<int> dijkstra(int start, int target, const vector<vector<Edge>>& graph) {
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
-        cerr << "Using: " << argv[0] << " <number of vertices> <target vertex> <repetitions>\n";
+        cerr << "Using: " << argv[0] << " <number of vertices> <target vertex> <countOfThreads>\n";
         return 1;
     }
 
     int vertex_count = stoi(argv[1]);
     int target_vertex = stoi(argv[2]);
-    int repetitions = stoi(argv[3]);
+    int countOfThreads = stoi(argv[3]);
 
 
     if (target_vertex >= vertex_count) {
@@ -83,10 +84,20 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    vector<thread> threads;
+
     vector<int> shortest_path;
-    for (int i = 0; i < repetitions; i++) {
-        shortest_path = dijkstra(0, target_vertex, graph);
+    for (int i = 0; i < countOfThreads; i++) {
+        threads.push_back(thread([=]() {
+            dijkstra(0, target_vertex, graph);
+        }));
     }
+
+    for (auto& t : threads) {
+        t.join();
+    }
+
+    threads.clear();
 
     return 0;
 }

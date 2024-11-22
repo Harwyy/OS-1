@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <io.h>
 #include <sys/stat.h>
+#include "thread"
 
 using namespace std;
 
@@ -39,7 +40,7 @@ void measureWriteSpeed(const string& filename, size_t blockSize, size_t totalBlo
     _close(fd);
 
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-    double speed = (blockSize * totalBlocks) / (duration.count() * 1024.0);
+    double speed = (blockSize * totalBlocks) / (duration.count() * 1024.0 * 1024.0);
 
     cout << "================" << endl;
     cout << "Total time: " << duration.count() / 1000 << " s" << endl;
@@ -49,21 +50,28 @@ void measureWriteSpeed(const string& filename, size_t blockSize, size_t totalBlo
 
 int main(int argc, char* argv[]) {
     if (argc != 5) {
-        cerr << "Usage: " << argv[0] << " <filename> <blockSize> <totalBlocks> <count>\n";
+        cerr << "Usage: " << argv[0] << " <filename> <blockSize> <totalBlocks> <countOfThreads>\n";
         return 1;
     }
 
     string filename = argv[1];
     size_t blockSize = static_cast<size_t>(stoi(argv[2]));
     size_t totalBlocks = static_cast<size_t>(stoi(argv[3]));
-    size_t repetitions = static_cast<size_t>(stoi(argv[4]));
+    size_t countOfThreads = static_cast<size_t>(stoi(argv[4]));
 
-    for (int i = 0; i < repetitions; i++) {
-          measureWriteSpeed(filename, blockSize, totalBlocks);
+    vector<thread> threads;
+
+    for (int i = 0; i < countOfThreads; i++) {
+        threads.push_back(thread([=]() {
+            measureWriteSpeed(filename + to_string(i), blockSize, totalBlocks);
+        }));
     }
+
+    for (auto& t : threads) {
+        t.join();
+    }
+
+    threads.clear();
 
     return 0;
 }
-
-
-

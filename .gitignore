@@ -6,6 +6,7 @@ compile_commands.json
 build/
 build-*/
 .vscode/
+cmake-build-debug
 
 # Temporaries
 *.log
