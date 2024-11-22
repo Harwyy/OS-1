@@ -6,7 +6,6 @@ compile_commands.json
 build/
 build-*/
 .vscode/
-benchmark/
 
 # Temporaries
 *.log
