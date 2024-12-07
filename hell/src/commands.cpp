@@ -99,7 +99,7 @@ void ls(){
   WIN32_FIND_DATA ffd;
   HANDLE hFind = INVALID_HANDLE_VALUE;
 
-  DWORD bufferSize = GetCurrentDirectoryA(0, nullptr);
+  DWORD bufferSize = GetCurrentDirectoryW(0, nullptr);
   if (bufferSize == 0){
     cerr << "Error getting buffer size for the current directory: "
          << GetLastError() << endl;
@@ -108,7 +108,7 @@ void ls(){
 
   char* buffer = new char[bufferSize];
 
-  if (GetCurrentDirectoryA(bufferSize, buffer) == 0){
+  if (GetCurrentDirectoryW(bufferSize, buffer) == 0){
     cerr << "Error getting the current directory: "
          << GetLastError() << endl;
     delete[] buffer;
@@ -167,7 +167,7 @@ void ls(){
 }
 
 void mkdir(const string & path){
-  DWORD bufferSize = GetCurrentDirectoryA(0, nullptr);
+  DWORD bufferSize = GetCurrentDirectoryW(0, nullptr);
 
   if (bufferSize == 0){
     cerr << "Error getting buffer size for the current directory: "
@@ -177,7 +177,7 @@ void mkdir(const string & path){
 
   char* buffer = new char[bufferSize];
 
-  if (GetCurrentDirectoryA(bufferSize, buffer) == 0){
+  if (GetCurrentDirectoryW(bufferSize, buffer) == 0){
     cerr << "Error getting the current directory: "
          << GetLastError() << endl;
     delete[] buffer;
@@ -201,7 +201,7 @@ void mkdir(const string & path){
 }
 
 void rmdir(const string & path){
-  DWORD bufferSize = GetCurrentDirectoryA(0, nullptr);
+  DWORD bufferSize = GetCurrentDirectoryW(0, nullptr);
 
   if (bufferSize == 0){
     cerr << "Error getting buffer size for the current directory: "
@@ -211,7 +211,7 @@ void rmdir(const string & path){
 
   char* buffer = new char[bufferSize];
 
-  if (GetCurrentDirectoryA(bufferSize, buffer) == 0){
+  if (GetCurrentDirectoryW(bufferSize, buffer) == 0){
     cerr << "Error getting the current directory: "
          << GetLastError() << endl;
     delete[] buffer;
